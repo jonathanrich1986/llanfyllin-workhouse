@@ -1,4 +1,29 @@
 @import "tailwindcss" theme(static);
+@plugin "@tailwindcss/typography";
 @source "../../app/**/*.php";
 @source "../**/*.blade.php";
 @source "../**/*.js";
+
+@theme {
+  --color-light-grey: #f5f5f5;
+}
+
+.no-child-margin-first {
+  @apply [&>*:first-child]:mt-0;
+}
+
+.no-child-margin-last {
+  @apply [&>*:last-child]:mb-0;
+}
+
+.no-child-margin {
+  @apply [&>*:first-child]:mt-0 [&>*:last-child]:mb-0;
+}
+
+.no-child-margin>.maybe-no-child-margin:first-child {
+  @apply [&>*:first-child]:mt-0 [&>*:last-child]:mb-0;
+}
+
+.no-child-margin>.maybe-no-child-margin:last-child {
+  @apply [&>*:first-child]:mt-0 [&>*:last-child]:mb-0;
+}
