@@ -1,11 +1,3 @@
-@props([
-    'class' => '',
-    'inner_class' => '',
-    'style' => '',
-    'section_settings' => [],
-    'use_prose' => false,
-])
-
 @if ($section_settings['custom_css'] ?? false)
 	<style>
 		{!! $section_settings['custom_css'] !!}
