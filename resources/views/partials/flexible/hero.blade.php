@@ -1,7 +1,19 @@
-<x-section :section_settings="$section_settings" :use_prose="true" :inner_class="'text-center'">
+<x-section :section_settings="$section_settings" :use_prose="true" class="h-[75vh]"
+	inner_class="text-center flex flex-col justify-center items-center">
 	@if ($subtitle)
-		<h2 class="uppercase tracking-widest text-sm font-medium mb-3">{{ $subtitle }}</h2>
+		<p
+			class="uppercase tracking-widest text-base font-bold mb-3 font-title text-primary group-[.is-dark]/layout:text-white">
+			{{ $subtitle }}</p>
 	@endif
-	<h1 class="text-4xl md:text-5xl font-bold mb-6">{{ $title }}</h1>
+	<x-title :size="$title_size" class="mt-0">{{ $title }}</x-title>
 	{!! $content !!}
+	@if ($buttons)
+		<div class="flex flex-wrap justify-center gap-4 mt-8">
+			@foreach ($buttons as $button)
+				<x-button :tag="'a'" :colour="$button['colour']" :style="$button['style']" :size="$button['size']" :url="$button['url']">
+					{{ $button['content'] }}
+				</x-button>
+			@endforeach
+		</div>
+	@endif
 </x-section>

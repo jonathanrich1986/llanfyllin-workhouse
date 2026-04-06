@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 @import "tailwindcss" theme(static);
 @plugin "@tailwindcss/typography";
 @source "../../app/**/*.php";
@@ -5,25 +6,148 @@
 @source "../**/*.js";
 
 @theme {
+  --color-primary: #8eae16;
+  --color-primary-lighter: #9dc115;
+  --color-primary-darker: #5e6f0b;
+  --color-secondary: #037680;
+  --color-secondary-lighter: #00bfa5;
+  --color-secondary-darker: #03514c;
+  --color-tertiary: #32373d;
+  --color-tertiary-lighter: #606a70;
+  --color-tertiary-darker: #1a1d20;
   --color-light-grey: #f5f5f5;
+  --color-mid-grey: #cccccc;
+  --color-dark-grey: #32373d;
+
+  /* Spacing */
+  --spacing-gutter: 2rem;
+
+  /* Fonts */
+  --font-title: 'Georgia', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+
 }
 
-.no-child-margin-first {
-  @apply [&>*:first-child]:mt-0;
+.prose {
+  --tw-prose-invert-body: #ffffff;
 }
 
-.no-child-margin-last {
-  @apply [&>*:last-child]:mb-0;
+
+@utility wr-button-base {
+  @apply inline-flex border gap-2 items-center font-bold capitalize text-center py-4 px-10 text-lg no-underline! transition-all cursor-pointer outline-none overflow-hidden subpixel-antialiased whitespace-nowrap select-none appearance-none  disabled:bg-mid-grey! disabled:border-mid-grey! disabled:cursor-not-allowed! disabled:text-dark-grey! rounded-lg shadow-lg hover:shadow-xl;
 }
 
-.no-child-margin {
-  @apply [&>*:first-child]:mt-0 [&>*:last-child]:mb-0;
-}
+@layer components {
+  .no-child-margin-first {
+    @apply [&>*:first-child]:mt-0!;
+  }
 
-.no-child-margin>.maybe-no-child-margin:first-child {
-  @apply [&>*:first-child]:mt-0 [&>*:last-child]:mb-0;
-}
+  .no-child-margin-last {
+    @apply [&>*:last-child]:mb-0!;
+  }
 
-.no-child-margin>.maybe-no-child-margin:last-child {
-  @apply [&>*:first-child]:mt-0 [&>*:last-child]:mb-0;
+  .no-child-margin {
+    @apply [&>*:first-child]:mt-0! [&>*:last-child]:mb-0!;
+  }
+
+  .no-child-margin>.maybe-no-child-margin:first-child {
+    @apply [&>*:first-child]:mt-0! [&>*:last-child]:mb-0!;
+  }
+
+  .no-child-margin>.maybe-no-child-margin:last-child {
+    @apply [&>*:first-child]:mt-0! [&>*:last-child]:mb-0!;
+  }
+
+  /* Sizes */
+  .wr-button-small {
+    @apply text-sm py-1 px-4 md:px-8;
+  }
+
+  .wr-button-large {
+    @apply text-lg py-2 px-6 md:px-10 md:text-xl;
+  }
+
+  /* Variants - Have to do as classes so we can apply easily to WooCommerce buttons */
+  
+  /* Solid */
+  .wr-button-solid,
+  .wr-button {
+    @apply wr-button-base;
+    @apply bg-light-grey text-black hover:bg-light-grey/90;
+  }
+
+  .wr-button-primary-solid,
+  .wr-button-primary {
+    @apply wr-button-base;
+    @apply bg-primary text-white border-primary hover:bg-primary-lighter;
+  }
+
+  .wr-button-secondary-solid,
+  .wr-button-secondary {
+    @apply wr-button-base;
+    @apply bg-secondary text-white border-secondary hover:bg-secondary-lighter;
+  }
+
+  .wr-button-tertiary-solid,
+  .wr-button-tertiary {
+    @apply wr-button-base;
+    @apply bg-tertiary text-white border-tertiary;
+    @apply bg-gradient-to-br from-tertiary to-red-600 hover:from-tertiary-lighter;
+  }
+
+  .wr-button-light-grey-solid,
+  .wr-button-light-grey {
+    @apply wr-button-base;
+    @apply bg-light-grey text-black border-light-grey hover:bg-light-grey/90;
+  }
+
+  .wr-button-black-solid,
+  .wr-button-black {
+    @apply wr-button-base;
+    @apply bg-black text-white hover:bg-black/90;
+  }
+
+  .wr-button-white-solid,
+  .wr-button-white {
+    @apply wr-button-base;
+    @apply bg-white text-black border-black hover:bg-white/90;
+  }
+
+  /* Outline */
+  .wr-button-outline {
+    @apply wr-button-base;
+    @apply text-black border-black hover:bg-black/10 hover:border-black bg-none!;
+  }
+
+  .wr-button-primary-outline {
+    @apply wr-button-base;
+    @apply text-primary border-primary hover:border-primary;
+  }
+
+  .wr-button-secondary-outline {
+    @apply wr-button-base;
+    @apply text-secondary border-secondary hover:border-secondary;
+  }
+
+  .wr-button-tertiary-outline {
+    @apply wr-button-base;
+    @apply text-tertiary border-tertiary hover:border-tertiary;
+  }
+
+  .wr-button-light_grey-outline {
+    @apply wr-button-base;
+    @apply text-mid-grey border-mid-grey hover:bg-mid-grey/10 hover:border-mid-grey;
+  }
+
+  .wr-button-black-outline {
+    @apply wr-button-base;
+    @apply text-black border-black hover:bg-black/10 hover:border-black;
+  }
+
+  .wr-button-white-outline {
+    @apply wr-button-base;
+    @apply text-white border-white hover:bg-white/10 hover:border-white;
+  }
+
 }

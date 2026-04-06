@@ -141,28 +141,29 @@ add_action('after_setup_theme', function () {
     add_theme_support('wc-product-gallery-zoom');
     add_theme_support('wc-product-gallery-lightbox');
     add_theme_support('wc-product-gallery-slider');
+
+    // Image sizes
+    add_image_size('square', 900, 900, true);
+    add_image_size('portrait', 600, 900, true);
+    add_image_size('landscape', 1200, 600, true);
+
 }, 20);
 
-/**
- * Register the theme sidebars.
- *
- * @return void
- */
-add_action('widgets_init', function () {
-    $config = [
-        'before_widget' => '<section class="widget %1$s %2$s">',
-        'after_widget' => '</section>',
-        'before_title' => '<h3>',
-        'after_title' => '</h3>',
-    ];
+add_action('init', function () {
 
-    register_sidebar([
-        'name' => __('Primary', 'sage'),
-        'id' => 'sidebar-primary',
-    ] + $config);
+    // Events
+    register_extended_post_type( 'event', [
+        'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
+        'has_archive' => true,
+        'rewrite' => ['slug' => 'events'],
+        'menu_icon' => 'dashicons-calendar-alt',
+    ] );
 
-    register_sidebar([
-        'name' => __('Footer', 'sage'),
-        'id' => 'sidebar-footer',
-    ] + $config);
+    // Event Categories
+    register_extended_taxonomy( 'event_category', 'event', [
+        'meta_box' => 'radio',
+    ], [
+        'singular' => 'Event Category',
+        'plural' => 'Event Categories',
+    ] );
 });

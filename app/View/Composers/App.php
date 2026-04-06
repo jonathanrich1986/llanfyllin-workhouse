@@ -22,4 +22,12 @@ class App extends Composer
     {
         return get_bloginfo('name', 'display');
     }
+
+    /**
+     * Retrieve the site tagline.
+     */
+    public function tagline(): string
+    {
+        return get_bloginfo('description', 'display');
+    }
 }
