@@ -8,6 +8,7 @@ class Events extends Composer
 {
     protected static $views = [
         'partials.flexible.events',
+        'archive-event',
     ];
 
     public function with()
@@ -15,6 +16,7 @@ class Events extends Composer
 
         return [
             'title' => get_sub_field('title') ?? '',
+            'titleSize' => get_sub_field('title_size') ?? 'medium',
             'subtitle' => get_sub_field('subtitle') ?? '',
             'content' => get_sub_field('content') ?? '',
             'card_template' => get_sub_field('card_template') ?: 'default',

@@ -1,14 +1,11 @@
-<footer class="bg-tertiary text-stone-400 py-10 is-dark prose-invert">
-	<x-section>
+<footer class="">
+	<x-section contentWidth="default" :useProse="true" backgroundColour="tertiary" class="pb-0" padding="small">
 		<div class="grid md:grid-cols-3 gap-8 mb-8">
-			<div>
-				<h4 class="text-white font-bold text-lg mb-3">Llanfyllin Workhouse</h4>
-				<p class="text-sm leading-relaxed">
-					A Grade II* listed Victorian workhouse in the heart of Powys, Wales — preserved as a living testament
-					to the history of poverty and the Poor Law.
-				</p>
+			<div class="no-child-margin">
+				<x-logo class="mb-4" type="white" class="w-24 h-auto" />
+				<x-address format="list" />
 			</div>
-			<div>
+			<div class=" no-child-margin">
 				<h4 class="text-white font-bold mb-3">Quick Links</h4>
 				<ul class="space-y-2 text-sm">
 					<li><a href="#home" class="hover:text-primary-300 transition-colors">Home</a></li>
@@ -20,7 +17,7 @@
 					<li><a href="#membership" class="hover:text-primary-300 transition-colors">Membership / Donate</a></li>
 				</ul>
 			</div>
-			<div>
+			<div class="no-child-margin">
 				<h4 class="text-white font-bold mb-3">Support the Workhouse</h4>
 				<p class="text-sm leading-relaxed mb-4">
 					The workhouse relies on admission fees, donations, and the time of dedicated volunteers.
@@ -32,10 +29,13 @@
 				</a>
 			</div>
 		</div>
-		<div class="border-t border-secondary-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
-			<p>© 2024 Llanfyllin Workhouse Heritage Centre. All rights reserved.</p>
-			<p class="text-stone-600 text-xs">
-				Llanfyllin, Powys, Wales · Charity registered in England &amp; Wales
+		<div
+			class="text-stone-400 border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
+			<p>© {{ date('Y') }} Llanfyllin Workhouse Heritage Centre. All rights reserved.</p>
+			<p class="text-xs">
+				Website by <a href="https://www.lonelytree.co.uk"
+					class="font-bold transition-colors bg-linear-to-br from-secondary to-primary bg-clip-text text-transparent"
+					target="_blank">Lonely Tree Media</a>
 			</p>
 		</div>
 	</x-section>

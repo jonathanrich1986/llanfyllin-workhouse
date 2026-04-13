@@ -1629,3 +1629,23 @@ if (!function_exists('wr_add_admin_notice')) {
     set_transient($key, $existing_notices, DAY_IN_SECONDS);
   }
 }
+
+if (!function_exists('wr_camel_case')) {
+
+  /**
+   * Convert a string to camelCase
+   *
+   * @param string $string
+   * @return string
+   */
+  function wr_camel_case(string $string): string
+  {
+
+    $string = str_replace(['-', '_'], ' ', $string);
+    $string = ucwords($string);
+    $string = str_replace(' ', '', $string);
+    $string = lcfirst($string);
+
+    return $string;
+  }
+}

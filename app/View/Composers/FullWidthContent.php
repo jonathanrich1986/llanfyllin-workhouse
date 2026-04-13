@@ -14,6 +14,7 @@ class FullWidthContent extends Composer
     {
         return [
             'title' => get_sub_field('title') ?? '',
+            'titleSize' => get_sub_field('title_size') ?? 'medium',
             'subtitle' => get_sub_field('subtitle') ?? '',
             'content' => get_sub_field('content') ?? '',
             'buttons' => $this->getButtons(),

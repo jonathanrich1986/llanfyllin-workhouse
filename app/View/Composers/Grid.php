@@ -17,6 +17,7 @@ class Grid extends Composer
 
         return [
             'title' => get_sub_field('title') ?? '',
+            'titleSize' => get_sub_field('title_size') ?? 'medium',
             'subtitle' => get_sub_field('subtitle') ?? '',
             'content' => get_sub_field('content') ?? '',
             'type' => $type,
@@ -40,10 +41,11 @@ class Grid extends Composer
                 while (have_rows('custom_boxes')) {
                     the_row();
                     $boxes[] = [
-                        'icon' => wr_icon(get_sub_field('icon') ?: null),
+                        'icon' => get_sub_field('icon') ? wr_icon(get_sub_field('icon')) : null,
                         'title' => get_sub_field('title') ?: '',
                         'content' => get_sub_field('content') ?: '',
                         'url' => get_sub_field('url') ?: '#',
+                        'image' => get_sub_field('image') ?: null,
                     ];
                 }
                 break;
@@ -55,6 +57,7 @@ class Grid extends Composer
                         'title' => get_the_title($post),
                         'content' => get_the_excerpt($post),
                         'url' => get_permalink($post),
+                        'image' => get_the_post_thumbnail_url($post, 'medium_large') ?: null,
                     ];
                 }
                 break;

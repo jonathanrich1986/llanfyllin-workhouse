@@ -1,9 +1,9 @@
-<x-section :section_settings="$section_settings" :use_prose="true" class="" inner_class="">
+<x-section :useProse="true">
 	{{-- Header Logic --}}
 	@if ($subtitle)
 		<p class="uppercase tracking-widest text-sm font-bold mb-3 font-title text-primary text-center">{{ $subtitle }}</p>
 	@endif
-	<x-title :size="$title_size" class="text-center mt-0">{{ $title }}</x-title>
+	<x-title size="{{ $titleSize ?? 'medium' }}" class="text-center mt-0">{{ $title }}</x-title>
 	{!! $content !!}
 
 	<div class="relative mt-12">

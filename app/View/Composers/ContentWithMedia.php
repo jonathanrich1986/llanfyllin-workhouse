@@ -21,7 +21,7 @@ class ContentWithMedia extends Composer
 
         return [
             'title' => get_sub_field('title'),
-            'title_size' => get_sub_field('title_size') ?: 'medium',
+            'titleSize' => get_sub_field('title_size') ?? 'medium',
             'subtitle' => get_sub_field('subtitle'),
             'content' => get_sub_field('content'),
             'buttons' => $buttons,

@@ -1,10 +1,10 @@
-<x-section :section_settings="$section_settings" :use_prose="true">
+<x-section :useProse="true">
 	@if ($subtitle)
 		<p
 			class="uppercase tracking-widest text-sm font-bold mb-3 font-title text-center text-primary group-[.is-dark]/layout:text-white">
 			{{ $subtitle }}</p>
 	@endif
-	<x-title class="text-center mt-0">{{ $title }}</x-title>
+	<x-title class="text-center mt-0" size="{{ $titleSize ?? 'medium' }}">{{ $title }}</x-title>
 	{!! $content !!}
 	@if ($buttons)
 		<div class="flex flex-wrap justify-center gap-4 mt-8">

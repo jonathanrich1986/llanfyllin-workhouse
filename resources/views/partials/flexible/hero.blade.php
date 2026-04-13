@@ -1,5 +1,4 @@
-<x-section :section_settings="$section_settings" :use_prose="true" class="h-[75vh]"
-	inner_class="text-center flex flex-col justify-center items-center">
+<x-section :useProse="true" class="h-[75vh]" innerClass="text-center flex flex-col" contentPosition="right">
 	@if ($subtitle)
 		<p
 			class="uppercase tracking-widest text-base font-bold mb-3 font-title text-primary group-[.is-dark]/layout:text-white">

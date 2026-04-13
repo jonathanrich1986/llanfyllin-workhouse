@@ -18,6 +18,7 @@ export default defineConfig({
         'resources/js/app.js',
         'resources/css/editor.css',
         'resources/js/editor.js',
+        'resources/css/woocommerce.css',
       ],
       refresh: true,
     }),
@@ -39,6 +40,14 @@ export default defineConfig({
       '@styles': '/resources/css',
       '@fonts': '/resources/fonts',
       '@images': '/resources/images',
+    },
+  },
+  server: {
+    cors: true,
+    strictPort: true,
+    port: 5173,
+    hmr: {
+      host: 'localhost',
     },
   },
 });

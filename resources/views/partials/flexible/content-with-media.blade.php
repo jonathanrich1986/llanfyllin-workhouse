@@ -1,9 +1,9 @@
-<x-section :section_settings="$section_settings" :use_prose="true" class="" inner_class="">
+<x-section :useProse="true">
 	@if ($subtitle)
 		<p class="uppercase tracking-widest text-sm font-bold mb-3 font-title text-primary group-[.is-dark]/layout:text-white">
 			{{ $subtitle }}</p>
 	@endif
-	<x-title :size="$title_size" class="mt-0">{{ $title }}</x-title>
+	<x-title size="{{ $titleSize ?? 'medium' }}" class="mt-0">{{ $title }}</x-title>
 	<div class="grid grid-cols-2 gap-gutter">
 		<div class="{{ $layout === 'text-left' ? 'order-1' : 'order-2' }}">
 			{!! $content !!}

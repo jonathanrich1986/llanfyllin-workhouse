@@ -6,117 +6,114 @@ use Illuminate\View\Component;
 
 class Section extends Component
 {
-    /**
-     * The computed section settings used by the template.
-     *
-     * @var array
-     */
-    public array $section_settings;
 
     /**
      * Additional CSS classes for the outer section element.
      *
-     * @var string
+     * @var string|null
      */
-    public string $class;
+    public ?string $class;
 
     /**
      * Additional CSS classes for the inner container element.
      *
-     * @var string
+     * @var string|null
      */
-    public string $inner_class;
+    public ?string $innerClass;
 
     /**
      * Inline styles for the outer section element.
      *
-     * @var string
+     * @var string|null
      */
-    public string $style;
+    public ?string $style;
 
     /**
      * Whether to apply prose typography styles to the inner container.
      *
-     * @var bool
+     * @var bool|null
      */
-    public bool $use_prose;
+    public ?bool $useProse;
+
+    public ?string $backgroundColour;
+    public ?string $contentPosition;
+    public ?string $contentWidth;
+    public ?bool $boxedLayout;
+    public ?string $height;
+    public ?string $customCss;
+    public ?string $customClasses;
+    public ?string $layoutId;
+    public ?string $paddingTop;
+    public ?string $paddingBottom;
+    public ?string $marginTop;
+    public ?string $marginBottom;
+
+    public $backgroundImage;
+    public $backgroundImageMobile;
 
     /**
      * Create the component instance.
      *
-     * Individual setting parameters (boxed_layout, content_width, etc.) take
-     * precedence over the equivalent computed values in section_settings,
-     * allowing the component to be used both within the ACF flexible content
-     * loop (via section_settings) and manually (via direct parameters).
-     *
-     * @param array       $section_settings      Pre-computed settings from the ACF flexible content composer.
      * @param string      $class                 Additional classes for the outer <section> element.
-     * @param string      $inner_class           Additional classes for the inner container element.
+     * @param string      $innerClass           Additional classes for the inner container element.
      * @param string      $style                 Inline styles for the outer <section> element.
-     * @param bool        $use_prose             Whether to enable prose typography on the inner container.
-     * @param bool|null   $boxed_layout          Wrap content in a padded, rounded box.
-     * @param string|null $content_width         Content width: 'narrow', 'thin', 'default', or null for full width.
-     * @param string|null $background_colour     Background colour: 'primary', 'secondary', 'tertiary', 'light_grey', 'dark_grey', 'black', or 'white'.
-     * @param string|null $content_position      Content alignment: 'top', 'centre', 'bottom', 'left', 'right', 'top_left', 'top_right', 'bottom_left', or 'bottom_right'.
-     * @param mixed       $background_image      Desktop background image: ACF image array, attachment ID, or pre-rendered HTML string.
-     * @param mixed       $background_image_mobile Mobile background image: ACF image array, attachment ID, or pre-rendered HTML string.
-     * @param string|null $custom_css            Custom CSS scoped to this section.
-     * @param string|null $layout_id             HTML id attribute for the section.
+     * @param bool        $useProse             Whether to enable prose typography on the inner container.
+     * @param bool|null   $boxedLayout          Wrap content in a padded, rounded box.
+     * @param string|null $contentWidth         Content width: 'narrow', 'thin', 'default', or null for full width.
+     * @param string|null $height               Section height: 'default', 'hero', 'full'
+     * @param string|null $backgroundColour     Background colour: 'primary', 'secondary', 'tertiary', 'light_grey', 'dark_grey', 'black', or 'white'.
+     * @param string|null $contentPosition      Content alignment: 'top', 'centre', 'bottom', 'left', 'right', 'top_left', 'top_right', 'bottom_left', or 'bottom_right'.
+     * @param int|null    $backgroundImage      
+     * @param int|null    $backgroundImageMobile
+     * @param string|null $customCss            Custom CSS scoped to this section.
+     * @param string|null $customClasses        Additional custom classes for the section.
+     * @param string|null $layoutId             HTML id attribute for the section.
+     * @param string|null $paddingTop           Custom top padding: 'default', 'small', 'large', 'none', or null for default.
+     * @param string|null $paddingBottom        Custom bottom padding: 'default', 'small', 'large', 'none', or null for default.
+     * @param string|null $marginTop            Custom top margin: 'default', 'small', 'large', 'none', or null for default.
+     * @param string|null $marginBottom         Custom bottom margin: 'default', 'small', 'large', 'none', or null for default.
      */
     public function __construct(
-        array $section_settings = [],
-        string $class = '',
-        string $inner_class = '',
-        string $style = '',
-        bool $use_prose = false,
-        ?bool $boxed_layout = null,
-        ?string $content_width = null,
-        ?string $background_colour = null,
-        ?string $content_position = null,
-        $background_image = null,
-        $background_image_mobile = null,
-        ?string $custom_css = null,
-        ?string $layout_id = null,
+        ?string $class = null,
+        ?string $innerClass = null,
+        ?string $style = null,
+        ?bool $useProse = null,
+        ?bool $boxedLayout = null,
+        ?string $contentWidth = null,
+        ?string $height = null,
+        ?string $backgroundColour = null,
+        ?string $contentPosition = null,
+        ?int $backgroundImage = null,
+        ?int $backgroundImageMobile = null,
+        ?string $customCss = null,
+        ?string $customClasses = null,
+        ?string $layoutId = null,
+        ?string $paddingTop = null,
+        ?string $paddingBottom = null,
+        ?string $marginTop = null,
+        ?string $marginBottom = null,
     ) {
         $this->class = $class;
-        $this->inner_class = $inner_class;
+        $this->innerClass = $innerClass;
         $this->style = $style;
-        $this->use_prose = $use_prose;
+        $this->useProse = $useProse;
+        $this->boxedLayout = $boxedLayout;
+        $this->contentWidth = $contentWidth;
+        $this->backgroundColour = $backgroundColour;
+        $this->contentPosition = $contentPosition;
+        $this->height = $height;
+        $this->backgroundImage = $backgroundImage;
+        $this->backgroundImageMobile = $backgroundImageMobile;
+        $this->customCss = $customCss;
+        $this->customClasses = $customClasses;
+        $this->layoutId = $layoutId;
+        $this->paddingTop = $paddingTop;
+        $this->paddingBottom = $paddingBottom;
+        $this->marginTop = $marginTop;
+        $this->marginBottom = $marginBottom;
 
-        // Collect individual params that were explicitly provided (non-null).
-        $overrides = array_filter([
-            'boxed_layout'            => $boxed_layout,
-            'content_width'           => $content_width,
-            'background_colour'       => $background_colour,
-            'content_position'        => $content_position,
-            'background_image'        => $background_image,
-            'background_image_mobile' => $background_image_mobile,
-            'custom_css'              => $custom_css,
-            'layout_id'               => $layout_id,
-        ], fn ($v) => !is_null($v));
 
-        if (!empty($overrides)) {
-            $defaults = [
-                'background_colour'       => null,
-                'background_image'        => null,
-                'background_image_mobile' => null,
-                'boxed_layout'            => false,
-                'content_width'           => null,
-                'content_position'        => null,
-                'custom_css'              => null,
-                'disable_layout'          => false,
-                'layout_id'               => null,
-                'layout_index'            => null,
-            ];
-
-            $raw_settings = array_merge($defaults, $overrides);
-            $computed = $this->getSectionSettings($raw_settings);
-
-            // Individual params take precedence over anything in section_settings.
-            $this->section_settings = array_merge($section_settings, $computed);
-        } else {
-            $this->section_settings = $section_settings;
-        }
+        $this->setAcfSectionSettings();
     }
 
     /**
@@ -130,124 +127,39 @@ class Section extends Component
     }
 
     /**
-     * Normalise raw layout settings into the format consumed by the template.
+     * Maybe populate from ACF fields
      *
-     * @param array $settings
-     * @return array
+     * @return void
      */
-    protected function getSectionSettings(array $settings): array
+    protected function setAcfSectionSettings(): void
     {
-        $background_image = $settings['background_image'] ?? null;
-        if (is_array($background_image) && !empty($background_image['url'])) {
-            $settings['background_image'] = wp_get_attachment_image(
-                $background_image['id'],
-                'full',
-                false,
-                ['class' => 'w-full h-full object-cover']
-            );
-        } elseif (is_int($background_image)) {
-            $settings['background_image'] = wp_get_attachment_image(
-                $background_image,
-                'full',
-                false,
-                ['class' => 'w-full h-full object-cover']
-            );
+        $row = get_row(true);
+
+        if (! $row) {
+            return;
         }
 
-        $classes = $this->generateClasses($settings);
-
-        return [
-            'class'                   => $classes['wrapper_classes'],
-            'inner_class'             => $classes['inner_classes'],
-            'style'                   => $this->generateStyle($settings),
-            'id'                      => sanitize_title($settings['layout_id'] ?? null),
-            'background_image'        => $settings['background_image'] ?? null,
-            'background_image_mobile' => $settings['background_image_mobile'] ?? null,
-            'custom_css'              => $this->getCustomCss($settings),
-        ];
-    }
-
-    /**
-     * Generate wrapper and inner CSS classes from the raw settings array.
-     *
-     * @param array $settings
-     * @return array{wrapper_classes: string, inner_classes: string}
-     */
-    protected function generateClasses(array $settings): array
-    {
-        $wrapper_classes = ['flex', 'group/layout'];
-        $inner_classes = [
-            $this->getContentWidthClass($settings),
-            'mx-0!',
-        ];
-
-        if ($settings['boxed_layout']) {
-            $inner_classes[] = 'boxed-layout mx-auto relative p-12! rounded-2xl';
-            $wrapper_classes[] = 'py-20';
-
-            if ($settings['background_colour']) {
-                $inner_classes[] = $this->getBackgroundClass($settings);
-            }
-        } elseif ($settings['background_colour']) {
-            $wrapper_classes[] = $this->getBackgroundClass($settings);
-        }
-
-        if ($this->hasDarkBackground($settings)) {
-            $wrapper_classes[] = 'is-dark';
-            $inner_classes[] = 'prose-invert';
-        }
-
-        if (isset($settings['content_position'])) {
-            switch ($settings['content_position']) {
-                case 'top':
-                    $wrapper_classes[] = 'items-start justify-center';
-                    break;
-                case 'centre':
-                    $wrapper_classes[] = 'items-center justify-center';
-                    break;
-                case 'bottom':
-                    $wrapper_classes[] = 'items-end justify-center';
-                    break;
-                case 'left':
-                    $wrapper_classes[] = 'justify-start';
-                    break;
-                case 'right':
-                    $wrapper_classes[] = 'justify-end';
-                    break;
-                case 'top_left':
-                    $wrapper_classes[] = 'items-start justify-start';
-                    break;
-                case 'top_right':
-                    $wrapper_classes[] = 'items-start justify-end';
-                    break;
-                case 'bottom_left':
-                    $wrapper_classes[] = 'items-end justify-start';
-                    break;
-                case 'bottom_right':
-                    $wrapper_classes[] = 'items-end justify-end';
-                    break;
-                default:
-                    $wrapper_classes[] = 'items-center';
+        foreach ($row as $key => $value) {
+            if (strpos($key, 'layout_settings_') === 0) {
+                $setting_key = str_replace('layout_settings_', '', $key);
+                $setting_key = wr_camel_case($setting_key);
+                $this->$setting_key = $this->$setting_key ?? $value;
             }
         }
 
-        return [
-            'wrapper_classes' => implode(' ', $wrapper_classes),
-            'inner_classes'   => implode(' ', $inner_classes),
-        ];
     }
 
     /**
      * Map the background_colour setting to a Tailwind CSS class.
      *
-     * @param array $settings
      * @return string
      */
-    protected function getBackgroundClass(array $settings): string
+    public function getBackgroundColourClass(): string
     {
-        $bg_colour = $settings['background_colour'] ?? null;
-        $is_boxed  = $settings['boxed_layout'] ?? false;
-        $has_image = isset($settings['background_image']) && $settings['background_image'];
+
+        $bg_colour = $this->backgroundColour ?? null;
+        $is_boxed  = $this->boxedLayout ?? false;
+        $has_image = $this->backgroundImage;
 
         if ($bg_colour) {
             switch ($bg_colour) {
@@ -274,74 +186,88 @@ class Section extends Component
     }
 
     /**
-     * Determine whether the background colour is a dark variant.
+     * Get the CSS classes for the background gradient overlay if a background image is set.
      *
-     * @param array $settings
-     * @return bool
-     */
-    protected function hasDarkBackground(array $settings): bool
-    {
-        $bg_colour = $settings['background_colour'] ?? null;
-        return in_array($bg_colour, ['primary', 'secondary', 'tertiary', 'dark_grey', 'black']);
-    }
-
-    /**
-     * Build the inline CSS style string.
-     *
-     * @param array $settings
      * @return string
      */
-    protected function generateStyle(array $settings): string
-    {
-        return '';
-    }
+    public function getBackgroundGradientClass(): string {
 
-    /**
-     * Map the content_width setting to a Tailwind max-width class.
-     *
-     * @param array $settings
-     * @return string
-     */
-    protected function getContentWidthClass(array $settings): string
-    {
-        $content_width = $settings['content_width'] ?? null;
+        $classes = array();
+        $has_image = $this->backgroundImage;
+        $has_bg_colour = $this->backgroundColour;
+        $is_boxed = $this->boxedLayout;
 
-        if ($content_width) {
-            switch ($content_width) {
-                case 'narrow':
-                    return 'max-w-2xl';
-                case 'thin':
-                    return 'max-w-4xl';
-                case 'default':
-                    return 'max-w-6xl';
-                default:
-                    return 'max-w-none';
-            }
+        if ($has_image && (!$is_boxed || !$has_bg_colour && $is_boxed)) {
+            $classes[] = 'text-shadow-lg/20 before:absolute before:inset-0 before:z-10 before:from-0% before:to-50%';
+
+            // Gradient direction based on content position
+            $classes[] = match ($this->contentPosition) {
+                'top' => 'before:bg-gradient-to-b',
+                'centre' => 'before:bg-gradient-to-b',
+                'bottom' => 'before:bg-gradient-to-t',
+                'left' => 'before:bg-gradient-to-r',
+                'right' => 'before:bg-gradient-to-l',
+                'top_left' => 'before:bg-gradient-to-br',
+                'top_right' => 'before:bg-gradient-to-bl',
+                'bottom_left' => 'before:bg-gradient-to-tr',
+                'bottom_right' => 'before:bg-gradient-to-tl',
+                default => 'before:bg-gradient-to-t',
+            };
+
+            // Gradient colour based on background colour
+            $classes[] = match ($this->backgroundColour) {
+                'primary' => 'before:from-primary/80 before:to-primary/0',
+                'secondary' => 'before:from-secondary/80 before:to-secondary/0',
+                'tertiary' => 'before:from-tertiary/80 before:to-tertiary/0',
+                'light_grey' => 'before:from-light-grey/80 before:to-light-grey/0',
+                'dark_grey' => 'before:from-dark-grey/80 before:to-dark-grey/0',
+                'black' => 'before:from-black/80 before:to-black/0',
+                'white' => 'before:from-white/80 before:to-white/0',
+                default => 'before:from-black/80 before:to-black/0',
+            };
         }
 
-        return '';
+        return implode(' ', $classes);
+
+    }
+
+    /**
+     * Determine whether the background colour is a dark variant.
+     *
+     * @return bool
+     */
+    public function hasDarkBackground(): bool
+    {
+        $bg_colour = $this->backgroundColour ?? null;
+        $output = in_array($bg_colour, ['primary', 'secondary', 'tertiary', 'dark_grey', 'black']);
+
+        if (strpos($this->customClasses, 'is-dark') !== false) {
+            $output = true;
+        }
+
+        return $output;
     }
 
     /**
      * Process and optionally scope the custom CSS to the section's ID.
      *
-     * @param array $settings
      * @return string
      */
-    protected function getCustomCss(array $settings): string
+    public function getCustomCss(): string
     {
-        $custom_css = $settings['custom_css'] ?? null;
-        $output     = '';
-
-        if ($custom_css) {
-            $output = wp_strip_all_tags($custom_css);
-
-            if (isset($settings['layout_id']) && $settings['layout_id']) {
-                $id     = sanitize_title($settings['layout_id']);
-                $output = "#$id { $output }";
-            }
+        if (!$this->customCss) {
+            return '';
         }
 
-        return $output;
+        // Strip any malicious tags
+        $css = wp_strip_all_tags($this->customCss);
+
+        // If an ID is set, wrap the CSS to scope it
+        if ($this->layoutId) {
+            $id = sanitize_title($this->layoutId);
+            return "#$id { $css }";
+        }
+
+        return $css;
     }
 }

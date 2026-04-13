@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+	@include('partials.page-header')
+
+	@if (!have_posts())
+		<x-alert type="warning">
+			{!! __('Sorry, no results were found.', 'sage') !!}
+		</x-alert>
+
+		{!! get_search_form(false) !!}
+	@endif
+
 	@while (have_posts())
 		@php(the_post())
-		@include('partials.page-header')
-
-		{{-- Main Content --}}
-		@if (get_the_content())
-			<x-section contentWidth="default" :useProse="true">
-				@include('partials.content-page')
-			</x-section>
-		@endif
-
 		{{-- Flexible Content --}}
 		@if (have_rows('page_layouts'))
 			@while (have_rows('page_layouts'))
@@ -20,4 +21,5 @@
 			@endwhile
 		@endif
 	@endwhile
+
 @endsection

@@ -151,6 +151,9 @@ add_action('after_setup_theme', function () {
 
 add_action('init', function () {
 
+    // Register shortcodes
+    require_once __DIR__ . '/shortcodes.php';
+
     // Events
     register_extended_post_type( 'event', [
         'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],

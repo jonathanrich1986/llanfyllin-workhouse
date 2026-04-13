@@ -13,7 +13,7 @@ class Logo extends Component
     public function __construct($type = 'default')
     {
         $this->type = $type;
-        $logos = get_field('logos', 'options');
+        $logos = get_field('wr_logos', 'options');
         $found_logo = null;
         $default_logo = null;
 

@@ -1,4 +1,4 @@
-<header class="bg-white sticky top-0 z-50 shadow-lg">
+<header class="bg-white sticky top-0 z-50 shadow-lg h-28">
 	<div class="text-center flex py-3 gap-2 justify-center-safe" href="{{ home_url('/') }}">
 		<x-logo type="icon" class="h-auto max-h-12 w-auto" />
 		<div class="">
