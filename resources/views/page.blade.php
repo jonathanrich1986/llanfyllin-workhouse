@@ -7,7 +7,7 @@
 
 		{{-- Main Content --}}
 		@if (get_the_content())
-			<x-section contentWidth="default" :useProse="true">
+			<x-section contentWidth="default" :useProse="true" paddingTop="none">
 				@include('partials.content-page')
 			</x-section>
 		@endif

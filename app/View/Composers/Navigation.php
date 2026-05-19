@@ -7,7 +7,11 @@ use Log1x\Navi\Navi;
 
 class Navigation extends Composer
 {
-    protected static $views = ['partials.menu.*'];
+    protected static $views = [
+        'partials.menu.*',
+        'partials.menu-mobile.*',
+        'partials.menu-footer.*',
+    ];
 
     /**
      * The data to be passed to the view.
@@ -18,18 +22,21 @@ class Navigation extends Composer
     {
         return [
             'navigation' => $this->getMenu(),
+            'mobileMenu' => $this->getMenu('mobile_navigation'),
+            'footerMenu' => $this->getMenu('footer_navigation'),
         ];
     }
 
     /**
-     * Retrieve the menu items for the primary navigation.
+     * Retrieve the menu items for the specified navigation location.
      *
+     * @param string $location The navigation location (default: 'primary_navigation').
      * @return array
      */
-    public function getMenu()
+    public function getMenu($location = 'primary_navigation')
     {
-        if (has_nav_menu('primary_navigation')) {
-            return (new Navi())->build('primary_navigation')->toArray();
+        if (has_nav_menu($location)) {
+            return (new Navi())->build($location)->toArray();
         }
         return [];
     }

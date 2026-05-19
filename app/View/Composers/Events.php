@@ -42,21 +42,29 @@ class Events extends Composer
             'post_type' => 'event',
             'posts_per_page' => -1,
         ]);
+
         foreach ($events as $event) {
 
+            $has_passed = true;
             $dates = [];
 
             foreach (get_field('dates', $event->ID) as $date) {
                 $this_date = wr_datetime_from_format('Y-m-d',$date['date']);
-                $dates[$this_date->getTimestamp()] = [
-                    'date' => $this_date,
-                    'start_time' => $date['start_time'],
-                    'end_time' => $date['end_time'],
-                    'time_text' => $date['time_text'],
-                ];
+
+                if ($this_date >= wr_datetime()) {
+                    $has_passed = false;
+
+                    $dates[$this_date->getTimestamp()] = [
+                        'date' => $this_date,
+                        'start_time' => $date['start_time'],
+                        'end_time' => $date['end_time'],
+                        'time_text' => $date['time_text'],
+                    ];
+
+                }
             }
 
-            if (empty($dates)) {
+            if (empty($dates) || $has_passed) {
                 continue;
             }
 

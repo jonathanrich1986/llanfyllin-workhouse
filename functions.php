@@ -50,7 +50,7 @@ Application::configure()
 |
 */
 
-collect(['setup', 'filters', 'actions', 'theme', 'woocommerce'])
+collect(['setup', 'filters', 'actions', 'theme', 'woocommerce', 'campaign-monitor'])
     ->each(function ($file) {
         if (! locate_template($file = "app/{$file}.php", true, true)) {
             wp_die(

@@ -15,7 +15,7 @@
 					<label
 						class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm hover:border-primary/80 transition">
 						<input type="radio" name="add-to-cart" value="{{ $product_id }}" class="sr-only peer"
-							{{ $is_first ? 'checked' : '' }}>
+							data-min-price="{{ $product->get_price() }}" {{ $is_first ? 'checked' : '' }}>
 
 						<div class="flex flex-1 items-center justify-between">
 							<div>
@@ -51,6 +51,19 @@
 
 					<button type="button" @click="qty++"
 						class="cursor-pointer w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-gray-100 font-bold text-xl">+</button>
+				</div>
+			</div>
+
+			<div class="max-w-sm mx-auto">
+				<label for="custom_amount" class="block text-sm font-medium text-gray-700 mb-3 text-center">How much would you like
+					to pay for each membership?</label>
+				<span class="block text-xs text-gray-500 italic mb-2 text-center text-balance">The minimum amount is £<span
+						class="min-price">15</span>, but you can choose to
+					pay more if you'd like to support us further!</span>
+				<div class="flex items-center justify-center gap-2 max-w-28 mx-auto">
+					£<input type="number" name="custom_amount" id="custom_amount" min="15" step="1" value="15"
+						required
+						class="w-full border-gray-300 rounded-md shadow-sm focus:border-primary/50 focus:ring-primary/80 px-4 py-2" />
 				</div>
 			</div>
 

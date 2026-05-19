@@ -1,0 +1,117 @@
+@reference "./theme.css";
+
+ul.woocommerce-error {
+  @apply grid gap-2;
+  li {
+    @apply my-0!;
+  }
+
+}
+
+.woocommerce div.product form.cart .button {
+  @apply bg-primary text-white border-primary hover:bg-primary-lighter px-4 py-4 rounded-lg;
+}
+
+.woocommerce-form-login {
+  @apply grid md:grid-cols-2 gap-x-4 gap-y-2;
+
+  .lost_password {
+    @apply md:col-span-2 m-0;
+  }
+}
+
+.single-product {
+
+  .entry-summary {
+    @apply prose;
+
+    .price {
+      @apply hidden;
+    }
+  }
+
+
+
+  .variations_form {
+    tr {
+      @apply grid grid-cols-[12rem_1fr] gap-x-4 gap-y-2 items-start;
+      td {
+        @apply p-0;
+      }
+
+      th.label {
+        @apply pt-2 text-base;
+      }
+    }
+
+    select {
+      @apply w-full border border-mid-grey rounded-lg py-2 px-3;
+    }
+
+    .woocommerce-variation-add-to-cart {
+      @apply grid gap-4;
+
+      #ywcnp_form_name_your_price {
+        @apply mt-0! mb-0!;
+
+        .ywcnp_sugg_label {
+          @apply hidden!;
+        }
+
+        .ywcnp_min_label {
+          @apply text-primary mb-1 block;
+        }
+
+        p {
+          @apply m-0!;
+        }
+
+        .ywcnp_suggest_price_single {
+          @apply m-0! grid grid-cols-[10.5rem_0.5rem_1fr] gap-x-4 items-center;
+
+          label {
+            @apply text-base!;
+          }
+
+          input {
+            @apply m-0!;
+          }
+        }
+      }
+
+      .quantity {
+        @apply mt-0! mb-4! before:content-['Quantity'] before:block before:mb-2 before:text-base flex items-center gap-2 font-bold before:w-50;
+
+        label {
+          @apply text-base!;
+        }
+
+        input {
+          @apply m-0! w-20 border border-mid-grey rounded-lg py-2 px-3;
+        }
+      }
+    }
+  }
+
+  #ywcnp_suggest_price_single {
+    width: 100% !important;
+  }
+}
+
+
+body.woocommerce-checkout {
+
+  form {
+    @apply grid gap-8 grid-cols-1 md:grid-cols-2;
+
+    #order_review_heading {
+      @apply hidden;
+    }
+
+    .col-1, .col-2 {
+      @apply float-none! w-full!;
+    }
+    
+  }
+  
+}

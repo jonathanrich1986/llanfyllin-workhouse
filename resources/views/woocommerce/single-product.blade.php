@@ -17,21 +17,26 @@ the readme will list any important changes.
 @extends('layouts.app')
 
 @section('content')
-	@php
-		do_action('get_header', 'shop');
-		do_action('woocommerce_before_main_content');
-	@endphp
-	<h1>Test</h1>
-	@while (have_posts())
-		@php
-			the_post();
-			wc_get_template_part('content', 'single-product');
-		@endphp
-	@endwhile
+	{{-- 1. WooCommerce Wrapper Start --}}
+	@php do_action('woocommerce_before_main_content') @endphp
 
-	@php
-		do_action('woocommerce_after_main_content');
-		do_action('get_sidebar', 'shop');
-		do_action('get_footer', 'shop');
-	@endphp
+	<x-section>
+		@while (have_posts())
+			@php
+				the_post();
+				wc_get_template_part('content', 'single-product');
+			@endphp
+		@endwhile
+	</x-section>
+
+	{{-- 2. Flexible Content --}}
+	@if (have_rows('page_layouts'))
+		@while (have_rows('page_layouts'))
+			@php the_row() @endphp
+			@include('partials.flexible.' . get_row_layout())
+		@endwhile
+	@endif
+
+	{{-- 3. WooCommerce Wrapper End --}}
+	@php do_action('woocommerce_after_main_content') @endphp
 @endsection

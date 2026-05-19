@@ -36,6 +36,7 @@ class Section extends Component
     public ?bool $useProse;
 
     public ?string $backgroundColour;
+    public ?string $textColour;
     public ?string $contentPosition;
     public ?string $contentWidth;
     public ?bool $boxedLayout;
@@ -50,6 +51,7 @@ class Section extends Component
 
     public $backgroundImage;
     public $backgroundImageMobile;
+    public ?bool $keepBgBehindContentOnMobile;
 
     /**
      * Create the component instance.
@@ -62,6 +64,7 @@ class Section extends Component
      * @param string|null $contentWidth         Content width: 'narrow', 'thin', 'default', or null for full width.
      * @param string|null $height               Section height: 'default', 'hero', 'full'
      * @param string|null $backgroundColour     Background colour: 'primary', 'secondary', 'tertiary', 'light_grey', 'dark_grey', 'black', or 'white'.
+     * @param string|null $textColour           Text colour: 'automatic', 'light', 'dark', or null for automatic based on background.
      * @param string|null $contentPosition      Content alignment: 'top', 'centre', 'bottom', 'left', 'right', 'top_left', 'top_right', 'bottom_left', or 'bottom_right'.
      * @param int|null    $backgroundImage      
      * @param int|null    $backgroundImageMobile
@@ -72,6 +75,7 @@ class Section extends Component
      * @param string|null $paddingBottom        Custom bottom padding: 'default', 'small', 'large', 'none', or null for default.
      * @param string|null $marginTop            Custom top margin: 'default', 'small', 'large', 'none', or null for default.
      * @param string|null $marginBottom         Custom bottom margin: 'default', 'small', 'large', 'none', or null for default.
+     * @param bool|null   $keepBgBehindContentOnMobile Whether to keep the background image behind content on mobile when a mobile-specific image is set.
      */
     public function __construct(
         ?string $class = null,
@@ -82,6 +86,7 @@ class Section extends Component
         ?string $contentWidth = null,
         ?string $height = null,
         ?string $backgroundColour = null,
+        ?string $textColour = null,
         ?string $contentPosition = null,
         ?int $backgroundImage = null,
         ?int $backgroundImageMobile = null,
@@ -92,6 +97,7 @@ class Section extends Component
         ?string $paddingBottom = null,
         ?string $marginTop = null,
         ?string $marginBottom = null,
+        ?bool $keepBgBehindContentOnMobile = null,
     ) {
         $this->class = $class;
         $this->innerClass = $innerClass;
@@ -106,13 +112,14 @@ class Section extends Component
         $this->backgroundImageMobile = $backgroundImageMobile;
         $this->customCss = $customCss;
         $this->customClasses = $customClasses;
+        $this->textColour = $textColour;
         $this->layoutId = $layoutId;
         $this->paddingTop = $paddingTop;
         $this->paddingBottom = $paddingBottom;
         $this->marginTop = $marginTop;
         $this->marginBottom = $marginBottom;
-
-
+        $this->keepBgBehindContentOnMobile = $keepBgBehindContentOnMobile;
+    
         $this->setAcfSectionSettings();
     }
 
@@ -198,7 +205,11 @@ class Section extends Component
         $is_boxed = $this->boxedLayout;
 
         if ($has_image && (!$is_boxed || !$has_bg_colour && $is_boxed)) {
-            $classes[] = 'text-shadow-lg/20 before:absolute before:inset-0 before:z-10 before:from-0% before:to-50%';
+            $classes[] = 'text-shadow-lg/20 before:absolute before:inset-0 before:z-10 before:from-30% before:to-70%';
+
+            if (!$this->hasDarkBackground()) {
+                $classes[] = 'text-shadow-white/20';
+            }
 
             // Gradient direction based on content position
             $classes[] = match ($this->contentPosition) {
@@ -239,9 +250,16 @@ class Section extends Component
     public function hasDarkBackground(): bool
     {
         $bg_colour = $this->backgroundColour ?? null;
+        $text_colour = $this->textColour ?? null;
         $output = in_array($bg_colour, ['primary', 'secondary', 'tertiary', 'dark_grey', 'black']);
 
         if (strpos($this->customClasses, 'is-dark') !== false) {
+            $output = true;
+        }
+
+        if ($text_colour === 'dark') {
+            $output = false;
+        } else if ($text_colour === 'light') {
             $output = true;
         }
 

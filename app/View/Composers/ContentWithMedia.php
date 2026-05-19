@@ -41,7 +41,7 @@ class ContentWithMedia extends Composer
         return array_map(function ($button) {
             return [
                 'content' => $button['text'] ?? '',
-                'url' => $button['link'] ?? '#',
+                'url' => $button['link']['url'] ?? '#',
                 'colour' => $button['colour'] ?? 'primary',
                 'style' => $button['style'] ?? 'solid',
                 'size' => $button['size'] ?? 'medium',

@@ -1,5 +1,5 @@
 <a href="{{ $event['url'] }}"
-	class="not-prose bg-stone-50 border transform-gpu border-stone-200 no-child-margin relative overflow-clip aspect-2/3 flex items-end group/card duration-300 transition-all hover:scale-[1.02] shadow-xs hover:shadow-xl/30">
+	class="not-prose bg-stone-50 border transform-gpu border-stone-200 no-child-margin relative overflow-clip aspect-square sm:aspect-2/3 flex items-end group/card duration-300 transition-all hover:scale-[1.02] shadow-xs hover:shadow-xl/30">
 	@if ($event['featured_image'])
 		{!! wp_get_attachment_image($event['featured_image']['id'], 'portrait', false, [
 		    'class' => 'absolute inset-0 w-full h-full object-cover',

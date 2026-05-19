@@ -6,7 +6,7 @@
 	@endif
 	<x-title class="text-center mt-0" size="{{ $titleSize ?? 'medium' }}">{{ $title }}</x-title>
 	{!! $content !!}
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
 		@foreach ($events['events'] as $event)
 			@if (!$event['is_featured'])
 				@continue

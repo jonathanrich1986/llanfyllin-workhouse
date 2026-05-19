@@ -22,7 +22,7 @@
 	</header>
 
 	<div class="e-content no-child-margin text-sm">
-		@php(the_excerpt())
+		{!! $event['content'] !!}
 	</div>
 	<a href="{{ $event['url'] }}" class="mt-4 inline-block text-primary font-bold">
 		Read more
