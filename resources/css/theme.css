@@ -1,0 +1,30 @@
+@import "tailwindcss" theme(static);
+
+@plugin "@tailwindcss/typography";
+@source "../../app/**/*.php";
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+@theme {
+  --color-primary: #8eae16;
+  --color-primary-lighter: #9dc115;
+  --color-primary-darker: #5e6f0b;
+  --color-secondary: #037680;
+  --color-secondary-lighter: #00bfa5;
+  --color-secondary-darker: #03514c;
+  --color-tertiary: #071a24;
+  --color-tertiary-lighter: #0a2e3b;
+  --color-tertiary-darker: #040f12;
+  --color-light-grey: #f5f5f5;
+  --color-mid-grey: #cccccc;
+  --color-dark-grey: #32373d;
+
+  /* Spacing */
+  --spacing-gutter: 2rem;
+
+  /* Fonts */
+  --font-title: 'Georgia', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+
+}
