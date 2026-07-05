@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) or exit;
 
 add_filter( 'woocommerce_enable_order_notes_field', '__return_false' );
- 
+
 add_filter( 'woocommerce_add_to_cart_redirect', function ( $url ) {
   return wc_get_checkout_url();
 } );
@@ -90,7 +90,7 @@ function send_woocommerce_email($to, $subject, $title, $message) {
       $headers[] = 'BCC: ' . $admin_email;
   }
 
-  // 4. Send the email 
+  // 4. Send the email
   // We omit the manual "Content-Type" as the mailer handles this via the wrapped template
   $sent = $mailer->send(
       $to,
@@ -115,7 +115,7 @@ add_action( 'lt_send_membership_expiry_email', function() {
 
   // Today in the format Ymd
   $today = date('Ymd');
-  
+
   // Get all users where the meta key 'membership_expires' is equal to or less than today
   $users = get_users( array(
       'meta_key' => 'membership_expires',
@@ -333,7 +333,7 @@ function get_membership_page(): int {
 function order_contains_membership_product($order): bool {
 
     $order = wc_get_order($order);
-    
+
     if (!$order instanceof \WC_Order) {
         return false;
     }
@@ -359,9 +359,29 @@ function order_contains_membership_product($order): bool {
     return false;
 }
 
+// Clear cart (except for the product being added to cart) when adding a membership product to the cart
+add_action('woocommerce_add_to_cart', function($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data) {
+
+    if ( in_array( $product_id, get_membership_product_ids() ) ) {
+        // Get the current cart items
+        $cart_items = WC()->cart->get_cart();
+
+        // Loop through the cart items and remove all except the one being added
+        foreach ($cart_items as $key => $item) {
+            if ($key !== $cart_item_key) {
+                WC()->cart->remove_cart_item($key);
+            } else {
+                // If it's the same product, update the quantity to the new quantity
+                WC()->cart->set_quantity($key, $quantity);
+            }
+        }
+    }
+
+}, 10, 6);
+
 // Redirect to membership page when trying to view a membership product
 add_action( 'template_redirect', function() {
-    
+
     if ( is_shop() || is_product_category() || is_product_tag() ) {
         wp_redirect( get_permalink(get_membership_page()) ); // Redirect to the membership page
         exit;
